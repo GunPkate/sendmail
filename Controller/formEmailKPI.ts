@@ -17,22 +17,6 @@ function formEmailKPI(department: string): Array<string> {
   const checkMonth: Number = parseInt(moment().format("MM"));
   let set_quarter: Number = 0;
   let set_timeline: string = "";
-  // if (checkMonth === 12) {
-  //   set_quarter = quarter["q1"];
-  //   set_timeline = timeline["q1"];
-  // } else if (checkMonth === 3) {
-  //   set_quarter = quarter["q2"];
-  //   set_timeline = timeline["q2"];
-  // } else if (checkMonth === 6) {
-  //   set_quarter = quarter["q3"];
-  //   set_timeline = timeline["q3"];
-  // } else if (checkMonth === 9) {
-  //   set_quarter = quarter["q4"];
-  //   set_timeline = timeline["q4"];
-  // } else {
-  //   set_quarter = quarter["q1"];
-  //   set_timeline = timeline["q1"];
-  // }
 
   switch (checkMonth) {
     case 3:
