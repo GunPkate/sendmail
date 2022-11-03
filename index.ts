@@ -51,5 +51,7 @@ let time_set = `*/2 * * * * *`;
 // );
 // job.start();
 //service que
+console.log((+moment().format("YYYY"))+543);
+
 
 app.listen(port, () => console.log(`start server port: ${port} !!`));

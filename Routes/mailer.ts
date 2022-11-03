@@ -5,10 +5,10 @@ const router: Router = express.Router();
 router.post("/mail", async (req: Request, res: Response) => {
   try {
     const emails: Array<string> = [
-      "gundash1@hotmail.com",
-      "edvisory.test.mail@gmail.com",
+      // "gundash1@hotmail.com",
+      // "edvisory.test.mail@gmail.com",
       "pu.gun_st@tni.ac.th",
-      "gundash1@gmail.com",
+      // "gundash1@gmail.com",
     ];
 
     if (emails.length != 0) {
@@ -18,10 +18,10 @@ router.post("/mail", async (req: Request, res: Response) => {
         department_name: req.body,
         email_count: emails.length,
         email: emails,
-        info: info,
+        // info: info,
       });
     } else {
-      return "invalid Email";
+      res.status(404).json({ detail: "Email not found" });
     }
   } catch (error) {
     res.status(500);
