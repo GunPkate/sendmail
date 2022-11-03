@@ -2,6 +2,7 @@ import { plugin } from "./Routes/mailer";
 import moment from "moment";
 import { sendEmail } from "./function/sendmail";
 import server from "./server";
+import { sendmail } from "./Controller/SDA_KPI_controller";
 const cron = require("cron");
 const cronjob = cron.CronJob;
 
@@ -49,7 +50,8 @@ const init = async () => {
 
   // console.log((+moment().format("YYYY"))+543);
 
-  await server.register(plugin);
+  // await server.register(plugin);
+  await server.route(sendmail());
 
   await server.start();
   console.log(server.info.uri);
