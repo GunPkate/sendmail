@@ -1,10 +1,13 @@
-import { plugin } from "./Routes/mailer";
+import { ResponseToolkit } from "@hapi/hapi";
+import { mailer } from "./Routes/mailer";
+import { Cron } from "./Routes/CronMail";
 import moment from "moment";
 import { sendEmail } from "./function/sendmail";
 import server from "./server";
 import { sendmail } from "./Controller/SDA_KPI_controller";
 const cron = require("cron");
 const cronjob = cron.CronJob;
+const HapiCron = require("hapi-cron");
 
 const init = async () => {
   // let num: Number = 0;
@@ -50,11 +53,32 @@ const init = async () => {
 
   // console.log((+moment().format("YYYY"))+543);
 
-  // await server.register(plugin);
-  await server.route(sendmail());
+  // await server.register({
+  //   plugin: HapiCron,
+  //   options: {
+  //     jobs: [
+  //       {
+  //         name: "testcron",
+  //         time: "*/3 * * * * *",
+  //         timezone: "Europe/London",
+  //         request: {
+  //           method: "POST",
+  //           url: "/api/mailer/mail",
+  //         },
+  //         onComplete: (res: ResponseToolkit) => {
+  //           console.log(res); // 'hello world'
+  //         },
+  //       },
+  //     ],
+  //   },
+  // });
+
+  await server.register(Cron);
+  await server.register(mailer);
+  // await server.route(sendmail());
 
   await server.start();
   console.log(server.info.uri);
 };
-
+//email ภายใน?
 init().then();

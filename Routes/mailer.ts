@@ -1,8 +1,9 @@
 import { sendEmail } from "../function/sendmail";
 import Boom from "@hapi/boom";
 import { ResponseToolkit, Request, Server } from "@hapi/hapi";
+const HapiCron = require("hapi-cron");
 
-export const plugin = {
+export const mailer = {
   name: "user",
   version: "1.0.0",
   register: async (server: Server) => {
@@ -18,11 +19,17 @@ export const plugin = {
             // "gundash1@gmail.com",
           ];
 
+          const department = {
+            subject: "Education",
+            department: "CU Engineer",
+          };
           if (emails.length != 0) {
-            const info = await sendEmail(request.payload, emails);
+            // const info = await sendEmail(request.payload, emails);
+            const info = await sendEmail(department.department, emails);
 
             return h.response({
-              department_name: request.payload,
+              department_name: department.department,
+              // department_name: request.payload,
               email_count: emails.length,
               email: emails,
               // info: info,
