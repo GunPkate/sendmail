@@ -1,8 +1,8 @@
-import hapi, { Server } from "@hapi/hapi";
+import hapi, { ServerOptions } from "@hapi/hapi";
 
-const server: Server = hapi.server({
+const serverOptions: ServerOptions = {
   port: 3000,
   host: "localhost",
-});
+};
 
-export default server;
+export default serverOptions;

@@ -1,7 +1,6 @@
 import { sendEmail } from "../function/sendmail";
 import Boom from "@hapi/boom";
 import { ResponseToolkit, Request, Server } from "@hapi/hapi";
-const HapiCron = require("hapi-cron");
 
 export const mailer = {
   name: "user",
@@ -34,8 +33,8 @@ export const mailer = {
               email: emails,
               // info: info,
             });
-          } else {
-            const err = new Error("Email not found");
+          } else if (emails.length == 0 || department.department) {
+            const err = new Error("Email or Department not found");
             Boom.boomify(err, { statusCode: 404 });
             // res.status(404).json({ detail: "Email not found" });
           }
