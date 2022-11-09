@@ -40,6 +40,7 @@ function formEmailKPI(department: string): Array<string> {
       set_timeline = timeline["q4"];
   }
 
+  //Header & Footer
   let data = {
     name: department,
     // name: "วิทยาการคอมพิวเตอร์",
@@ -51,22 +52,7 @@ function formEmailKPI(department: string): Array<string> {
     time: set_timeline,
   };
 
-  // const html = fs.readFileSync(path.join(__dirname, "PDFtemplate/KPISDA.hbs"), {
-  //   encoding: "utf-8",
-  // });
-  // console.log(path.join(__dirname, "PDFtemplate/KPISDA.html"));
-
-  // var source =
-  //   "<p>เรียน {{name}}" +
-  //   "{{name}} สามารถเข้าระบบ เพื่อรายงานผลตัวชี้วัด และ ในไตรมาสที่ 1 ประจำปีงบประมาณ 2565 ภายในวันที่ 1 ธันวาคม พ.ศ. 2565 ถึงวันที่ 31 ธันวาคม พ.ศ. 2565</p>" +
-  //   "จึงเรียนมาเพื่อทราบ" +
-  //   "งานฝ่ายแผนและงบประมาณ" +
-  //   "ข้อมูลการติดต่อ" +
-  //   "{{emp_name}}" +
-  //   "โทร.{{tel}}" +
-  //   "Email:" +
-  //   "<ul>{{#emails}} <li>{{name}}</li>{{/emails}} </ul>";
-  let template = Handlebars.compile(source);
+  let template = Handlebars.compile(source); //Conent of Email
   // let template = Handlebars.compile(html);
 
   let result = template(data);
