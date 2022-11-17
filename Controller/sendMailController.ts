@@ -33,7 +33,7 @@ export const plugin = {
         console.log(checkMonth, typeof checkMonth, num);
 
         var job = new cronjob(
-          time_set,
+          time_set, 
           async function () {
             const dept = {
               subject: "Education",

@@ -15,11 +15,11 @@ const init = async () => {
   const server: Server = new Server(serverOptions);
   // await server.app.testController.sendmail()
   await server.register(mailer);
-  await server.register(plugin);
+  // await server.register(plugin);
   // await server.route(sendmail());
 
   await server.start();
   console.log(server.info.uri);
 };
-//email ภายใน?
+
 init().then();

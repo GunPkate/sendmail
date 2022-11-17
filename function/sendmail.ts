@@ -17,13 +17,14 @@ async function sendEmail(body: any, emails: Array<string>): Promise<any> {
     });
 
     const { from, to, subject, text, file, attachment } = body;
-    const result = formEmailKPI(body.department);
+    const result = await formEmailKPI(body.department);
     console.log(body);
     const optons = {
       from: from,
       to: emails,
       subject: result[0],
-      text: result[1],
+      // text: result[1],
+      html: result[1],
       attachments: [
         {
           filename: exercise,
