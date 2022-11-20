@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+      pointer-events: none;
+    }
+
+    .image img{
+        height: 250px;
+        margin-left: 200px;
+
+    }
+    
+  </style>
+  <body>
+      <h3>{{subject}}</h3>
+  
+  <p>เรียน {{name}}</p>
+  
+  <p>
+    {{name}} สามารถเข้าระบบบริหารจัดการตัวชี้วัดผลการดำเนินงานคณะวิศวกรรมศาสตร์ เพื่อรายงานผลตัวชี้วัด SDA และ KPI ในไตรมาสที่ {{quarter}} ประจำปีงบประมาณ {{budgetYear}} ภายใน{{time}}
+  </p>
+  
+  <p>
+  จึงเรียนมาเพื่อโปรดทราบ
+  <br>
+  งานฝ่ายแผนและงบประมาณ
+  </p>
+
+  <br>
+  
+  <div class="footer" style="display: flex;">
+    <div style="margin-top: 50px;">
+    <p>
+        ข้อมูลการติดต่อ
+        <br>
+        {{emp_name}}
+        <br>
+        โทร. {{tel}}
+    </p>
+    Email :{{#emails}}<a name="myname">{{mail}}</a>  {{/emails}}
+  </div>
+  <div class="image">
+    <img  src="../../attach/thana-bank-low-resolution-color-logo.png"/></div>
+  </div>
+  
+  
+  
+  
+  </body>
+</html>

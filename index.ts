@@ -6,6 +6,7 @@ import moment from "moment";
 import { sendEmail } from "./function/sendmail";
 import { sendmail } from "./Controller/SDA_KPI_controller";
 import serverOptions from "./server";
+import { local_dataSource } from "./DB/Mysql/local";
 const cron = require("cron");
 const cronjob = cron.CronJob;
 const HapiCron = require("hapi-cron");
@@ -18,6 +19,7 @@ const init = async () => {
   // await server.register(plugin);
   // await server.route(sendmail());
 
+  local_dataSource();
   await server.start();
   console.log(server.info.uri);
 };
