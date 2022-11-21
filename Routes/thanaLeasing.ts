@@ -1,5 +1,7 @@
+import { DebtEntity } from "./../DB/Entities/debt";
 import Boom from "@hapi/boom";
 import { ResponseToolkit, Request, Server } from "@hapi/hapi";
+import { local_dataSource } from "../DB/Mysql/local";
 import { sendmail_leasing } from "../function/sendmail_leasing";
 
 const apiName = "thanaLeasing";
@@ -11,6 +13,7 @@ export const thanaLeasing = {
       method: "POST",
       path: `/api/${apiName}/mail`,
       handler: async (request: Request, h: ResponseToolkit) => {
+        const con = local_dataSource();
         try {
           const emails: Array<string> = [
             "gundash1@hotmail.com",
@@ -18,9 +21,6 @@ export const thanaLeasing = {
             // "pu.gun_st@tni.ac.th",
             // "gundash1@gmail.com",
           ];
-
-          const query: string = "select * from debt";
-          let dataset: any[] = [];
 
           interface data {
             DebtID: number;

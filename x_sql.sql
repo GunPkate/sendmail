@@ -17,4 +17,4 @@ insert into customers (CustomerDetailId) VALUES(1);
 insert into customers (CustomerDetailId) VALUES(2);
 
 INSERT into debts (balance,customerId,debtTypeID) values (7000,1,1);
-INSERT into debts (balance,customerId,debtTypeID,createdAt) values (7000,2,1,'2022-06-21' );
+INSERT into debts (balance,customerId,debtTypeID,dueAt) values (7000,2,1,'2022-06-21');

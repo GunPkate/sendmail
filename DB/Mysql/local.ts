@@ -27,7 +27,7 @@ export const local_dataSource = async (): Promise<DataSource> => {
     username: "root",
     password: "",
     database: "leasing",
-    synchronize: true,
+    // synchronize: true,
     logging: true,
     entities: tables,
   });

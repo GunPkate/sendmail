@@ -6,8 +6,6 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -45,7 +43,10 @@ export class DebtEntity {
   @Column({ nullable: false })
   balance!: string;
 
-  @ManyToOne(() => DebtTypeEntity,(debtType:DebtTypeEntity)=>debtType.DebtId)
+  @ManyToOne(
+    () => DebtTypeEntity,
+    (debtType: DebtTypeEntity) => debtType.DebtId
+  )
   @JoinColumn({ name: "debtTypeID" })
   debtTypeID!: DebtTypeEntity;
 
@@ -53,5 +54,5 @@ export class DebtEntity {
     default: () => "CURRENT_TIMESTAMP",
     type: "datetime",
   })
-  createdAt!: Date;
+  dueAt!: Date;
 }
