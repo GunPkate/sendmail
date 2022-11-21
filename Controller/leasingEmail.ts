@@ -36,9 +36,9 @@ async function setData(debtList: debtList) {
 
   const now = moment();
   let date2 = moment(debtList.dueAt).format("YYYY-MM-DD");
-  let date3 = moment(date2.split("-"));
-  console.log(leasee, now.diff(date3, "days"));
-  let lateDue = now.diff(date3, "days");
+  let dateCal = moment(date2.split("-"));
+  console.log(leasee, now.diff(dateCal, "days"));
+  let lateDue = now.diff(dateCal, "days");
   // console.log(leasee, moment().diff(moment(date), "days"));
 
   let filepath = "";
@@ -54,7 +54,7 @@ async function setData(debtList: debtList) {
   } else if (lateDue > 90) {
     filepath = "badDebt.hbs";
     deadline = now.add(15).format("DD-MM-YYYY");
-  } else{
+  } else {
     filepath = "normalAR.hbs";
   }
 
