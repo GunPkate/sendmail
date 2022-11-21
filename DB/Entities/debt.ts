@@ -1,4 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CustomerEntity } from './customer_entity';
+import { DebtTypeEntity } from "./debtType";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity({ name: "Debts" })
 export class DebtEntity {
@@ -23,12 +33,21 @@ export class DebtEntity {
 
   @PrimaryGeneratedColumn()
   DebtId!: number;
-  @Column({ nullable: false, name: "FirstName" })
-  firstName!: string;
-  @Column({ nullable: false, name: "LastName" })
-  lastName!: string;
-  @Column({ nullable: false, unique: true })
-  departmentID!: number;
+
+  
+  @ManyToOne(
+    () => CustomerEntity,
+    (customer: CustomerEntity) => customer.customerId
+  )
+  customerID!: number;
+
   @Column({ nullable: false })
-  customerId!: number;
+  Balance!: string;
+
+  @OneToOne(() => DebtTypeEntity)
+  @JoinColumn()
+  DebtTypeID!: DebtTypeEntity;
+
+  @Column({ nullable: false })
+  Date!: Date;
 }

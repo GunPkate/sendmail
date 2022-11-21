@@ -1,4 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CustomerEntity } from "./customer_entity";
+import { DepartmentEntity } from "./department_entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity({ name: "Employees" })
 export class EmployeeEntity {
@@ -23,12 +32,21 @@ export class EmployeeEntity {
 
   @PrimaryGeneratedColumn()
   employeeId!: number;
-  @Column({ nullable: false, name: "FirstName" })
-  firstName!: string;
-  @Column({ nullable: false, name: "LastName" })
-  lastName!: string;
-  @Column({ nullable: false, unique: true })
-  departmentID!: number;
+
   @Column({ nullable: false })
-  customerId!: number;
+  firstName!: string;
+
+  @Column({ nullable: false })
+  lastName!: string;
+
+  @OneToOne(() => DepartmentEntity)
+  @JoinColumn()
+  departmentId!: DepartmentEntity;
+
+  @OneToMany(
+    () => CustomerEntity,
+    (customer: CustomerEntity) => customer.customerId,
+    { cascade: true }
+  )
+  customerId!: Array<CustomerEntity>;
 }
