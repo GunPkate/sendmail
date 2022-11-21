@@ -38,7 +38,6 @@ async function sendmail_leasing(
 
     const info = await transporter.sendMail(optons);
     // console.log(info);
-    // return info;
     return info;
   } catch (error) {
     console.log(error);
