@@ -4,6 +4,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -39,14 +40,16 @@ export class EmployeeEntity {
   @Column({ nullable: false })
   lastName!: string;
 
-  @OneToOne(() => DepartmentEntity)
-  @JoinColumn()
+  @ManyToOne(
+    () => DepartmentEntity,
+    (department: DepartmentEntity) => department.departmentId
+  )
+  @JoinColumn({ name: "departmentId" })
   departmentId!: DepartmentEntity;
 
   @OneToMany(
     () => CustomerEntity,
-    (customer: CustomerEntity) => customer.customerId,
-    { cascade: true }
+    (customer: CustomerEntity) => customer.customerId
   )
   customerId!: Array<CustomerEntity>;
 }

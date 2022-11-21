@@ -31,17 +31,20 @@ export class CustomerEntity {
   //   this.contact = contact;
 
   // }
+
+
   @ManyToOne(
     () => EmployeeEntity,
     (employee: EmployeeEntity) => employee.customerId
   )
-  // @OneToMany(() => DebtEntity, (debt: DebtEntity) => debt.customerID, {
-  //   cascade: true,
-  // })
-  @PrimaryGeneratedColumn()
+  @OneToMany(() => DebtEntity, (debt: DebtEntity) => debt.customerId, {
+    cascade: true,
+  })
+  @PrimaryGeneratedColumn({ name: "customerId" })
   customerId!: number;
 
+
   @OneToOne(() => CustomerDetailDetailEntity)
-  @JoinColumn()
+  @JoinColumn({ name: "customerDetailId" })
   customerDetailId!: CustomerDetailDetailEntity;
 }

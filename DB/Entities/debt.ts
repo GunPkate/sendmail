@@ -1,7 +1,8 @@
-import { CustomerEntity } from './customer_entity';
+import { CustomerEntity } from "./customer_entity";
 import { DebtTypeEntity } from "./debtType";
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -32,22 +33,25 @@ export class DebtEntity {
   // }
 
   @PrimaryGeneratedColumn()
-  DebtId!: number;
+  debtId!: number;
 
-  
   @ManyToOne(
     () => CustomerEntity,
     (customer: CustomerEntity) => customer.customerId
   )
-  customerID!: number;
+  @JoinColumn({ name: "customerId" })
+  customerId!: number;
 
   @Column({ nullable: false })
-  Balance!: string;
+  balance!: string;
 
-  @OneToOne(() => DebtTypeEntity)
-  @JoinColumn()
-  DebtTypeID!: DebtTypeEntity;
+  @ManyToOne(() => DebtTypeEntity,(debtType:DebtTypeEntity)=>debtType.DebtId)
+  @JoinColumn({ name: "debtTypeID" })
+  debtTypeID!: DebtTypeEntity;
 
-  @Column({ nullable: false })
-  Date!: Date;
+  @CreateDateColumn({
+    default: () => "CURRENT_TIMESTAMP",
+    type: "datetime",
+  })
+  createdAt!: Date;
 }
