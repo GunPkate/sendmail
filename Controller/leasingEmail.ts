@@ -3,8 +3,20 @@ import Handlebars from "handlebars";
 import fs from "fs";
 import path from "path";
 
-async function leasingEmail(): Promise<Array<string>> {
-  const setmail = await setData();
+interface debtList 
+  {
+    "FirstName": string,
+    "LastName": string,
+    "email": string,
+    "balance": string,
+    "dueAt": Date,
+    "customerId":number,
+    "debtTypeID":number,
+    "DebtType": string
+  }
+
+async function leasingEmail(debtList: debtList): Promise<Array<string>> {
+  const setmail = await setData(debtList);
   let data = {
     deptname: setmail.deptname,
     subject: setmail.subject,
@@ -26,12 +38,12 @@ async function leasingEmail(): Promise<Array<string>> {
   return [data.subject, result];
 }
 
-async function setData() {
+async function setData(debtList:debtList) {
   const deptname = "ธนาคาร ธ.ธนา";
   const subject = "ขอแจ้งยอดเงินค้างชำระ";
-  const leasee = "A";
-  const date = moment().format("DD-MM-YYYY hh:mm:ss");
-  const debt = 7000;
+  const leasee = debtList.FirstName+" "+debtList;
+  const date = debtList.dueAt;
+  const debt = debtList.balance;
   const enp_name = "B";
 
   let filepath = "normalAR.hbs";

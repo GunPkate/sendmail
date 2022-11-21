@@ -17,9 +17,9 @@ async function sendmail_leasing(
       },
     });
 
-    const { from, to, subject, text, file, attachment } = body;
+    const { from } = body;
     // const result = await formEmailKPI(body.department);
-    const result = await leasingEmail();
+    const result = await leasingEmail(body);
     // console.log(body);
     const optons = {
       from: from,

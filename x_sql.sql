@@ -18,3 +18,8 @@ insert into customers (CustomerDetailId) VALUES(2);
 
 INSERT into debts (balance,customerId,debtTypeID) values (7000,1,1);
 INSERT into debts (balance,customerId,debtTypeID,dueAt) values (7000,2,1,'2022-06-21');
+
+Select * 
+from customers c 
+Join customerdetails d on d.customerDetailId = c.customerDetailId
+JOIN debts db on db.customerId = c.customerId 

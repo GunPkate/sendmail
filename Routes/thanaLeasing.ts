@@ -1,4 +1,3 @@
-import { DebtEntity } from "./../DB/Entities/debt";
 import Boom from "@hapi/boom";
 import { ResponseToolkit, Request, Server } from "@hapi/hapi";
 import { local_dataSource } from "../DB/Mysql/local";
@@ -13,14 +12,19 @@ export const thanaLeasing = {
       method: "POST",
       path: `/api/${apiName}/mail`,
       handler: async (request: Request, h: ResponseToolkit) => {
-        const con = local_dataSource();
+        const con =await local_dataSource()
         try {
+          const query:string = "Select * from debts";
+          const result = con.query(query)
+          console.log(result);
+          
           const emails: Array<string> = [
             "gundash1@hotmail.com",
             // "edvisory.test.mail@gmail.com",
             // "pu.gun_st@tni.ac.th",
             // "gundash1@gmail.com",
           ];
+
 
           interface data {
             DebtID: number;
@@ -39,7 +43,7 @@ export const thanaLeasing = {
               // department_name: request.payload,
               // email_count: emails.length,
               // email: emails,
-              info: info,
+              info: result,
             });
           } else if (emails.length == 0) {
             // } else if (emails.length == 0 || department.department) {

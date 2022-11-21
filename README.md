@@ -11,3 +11,8 @@ maybe for loop different departments email may have different contents according
 
 attach image in email  
 https://stackoverflow.com/questions/48449379/embed-image-in-email-body-nodemailer-nodejs
+
+```
+http://localhost:3000/lease/debts
+http://localhost:3000/lease/debts
+```
