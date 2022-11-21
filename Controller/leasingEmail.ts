@@ -1,6 +1,5 @@
 import moment from "moment";
 import Handlebars from "handlebars";
-import { source } from "./PDFtemplate/source";
 import fs from "fs";
 import path from "path";
 

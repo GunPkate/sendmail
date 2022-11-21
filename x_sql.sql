@@ -1,0 +1,1 @@
+insert into customerdetails (FirstName,LastName,email,contact,address) VALUES('A','B','gundash1@gmail.com','0822224455','Bangkok');

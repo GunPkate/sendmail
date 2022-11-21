@@ -1,4 +1,5 @@
-import { exercise, attachmentV1 } from "../attach/file";
+import { logo_footer } from "./../attach/file";
+import { exercise, attachmentV1, logo } from "../attach/file";
 import nodemailer from "nodemailer";
 import formEmailKPI from "../Controller/formEmailKPI";
 import leasingEmail from "../Controller/LeasingEmail";
@@ -14,10 +15,6 @@ async function sendmail_leasing(
         user: "gundash1@gmail.com",
         pass: "jyztxzmaptdfpsie",
       },
-      // auth: {
-      //     "user": "edvisory.test.mail@gmail.com",
-      //     "pass": "A#8d@3mn"
-      // }
     });
 
     const { from, to, subject, text, file, attachment } = body;
@@ -32,8 +29,9 @@ async function sendmail_leasing(
       html: result[1],
       attachments: [
         {
-          filename: exercise,
-          path: attachmentV1,
+          filename: logo,
+          path: logo_footer,
+          cid: "logo",
         },
       ],
     };
@@ -45,16 +43,6 @@ async function sendmail_leasing(
   } catch (error) {
     console.log(error);
   }
-
-  //   transporter.sendMail(optons, (err, info) => {
-  // if (err) {
-  //   console.log(err);
-  //   return;
-  // }
-  // console.log("send: " + info.response);
-  // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // return info;
-  //   });
 }
 
 export { sendmail_leasing };
