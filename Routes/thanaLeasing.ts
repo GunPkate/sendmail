@@ -1,6 +1,6 @@
-import { sendEmail } from "../function/sendmail";
 import Boom from "@hapi/boom";
 import { ResponseToolkit, Request, Server } from "@hapi/hapi";
+import { sendmail_leasing } from "../function/sendmail_leasing";
 
 const apiName = "thanaLeasing";
 export const thanaLeasing = {
@@ -31,7 +31,7 @@ export const thanaLeasing = {
           }
 
           if (emails.length != 0) {
-            // const info = await sendEmail(request.payload, emails);
+            const info = await sendmail_leasing(request.payload, emails);
             // const info = await sendEmail(department.department, emails);
 
             return h.response({
@@ -39,7 +39,7 @@ export const thanaLeasing = {
               // department_name: request.payload,
               // email_count: emails.length,
               // email: emails,
-              // info: info,
+              info: info,
             });
           } else if (emails.length == 0) {
             // } else if (emails.length == 0 || department.department) {

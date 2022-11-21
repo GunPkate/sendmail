@@ -1,9 +1,12 @@
-import { exercise, attachmentV1 } from "./../attach/file";
+import { exercise, attachmentV1 } from "../attach/file";
 import nodemailer from "nodemailer";
 import formEmailKPI from "../Controller/formEmailKPI";
 import leasingEmail from "../Controller/LeasingEmail";
 
-async function sendEmail(body: any, emails: Array<string>): Promise<any> {
+async function sendmail_leasing(
+  body: any,
+  emails: Array<string>
+): Promise<any> {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -18,8 +21,9 @@ async function sendEmail(body: any, emails: Array<string>): Promise<any> {
     });
 
     const { from, to, subject, text, file, attachment } = body;
-    const result = await formEmailKPI(body.department);
-    console.log(body);
+    // const result = await formEmailKPI(body.department);
+    const result = await leasingEmail();
+    // console.log(body);
     const optons = {
       from: from,
       to: emails,
@@ -53,4 +57,4 @@ async function sendEmail(body: any, emails: Array<string>): Promise<any> {
   //   });
 }
 
-export { sendEmail };
+export { sendmail_leasing };
