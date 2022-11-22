@@ -36,7 +36,8 @@ leaseMailController(con)| -getDebtList()  query without parameter return result 
 |Description| Image|
 |---|---|
 | email example|![image](https://user-images.githubusercontent.com/77183620/203179734-bdbd88cd-e22d-4e7f-b8d6-c64739ae5f85.png)|
-| ERD |![image](https://user-images.githubusercontent.com/77183620/203180068-39c496b9-440e-46e3-a14b-71214f775a6e.png)|
+| ERD |![image](https://user-images.githubusercontent.com/77183620/203297493-eb1e84e8-375f-429b-8c0c-4ff51eb1086b.png)
+|
 
 
 
