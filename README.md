@@ -1,4 +1,5 @@
 # sendmail
+https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbWRzQTZMZ0Q3QzRrTElIV1RESmlQLUJXR1Q1d3xBQ3Jtc0ttNFlzUms5Y1A3aUhUMTFpei1QU0tMNndhS201WFZjbkhaWlhHQ2tUMG0yN013ZVNkX0FxckkydXFyWjhqR0tBX2dtVnljX3JOYURUUkdwaFVkeXhZRjNRelZ2UGdEYm40S3BHbWFRZjlxUy1DSURrRQ&q=https%3A%2F%2Fmedium.com%2F%40gundash1%2Ftype-orm-automail-leasing-4cb3466b6aac&v=Jr7BfkAJSxU
 
 |list of tech|
 |---|
