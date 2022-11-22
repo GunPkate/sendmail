@@ -1,3 +1,4 @@
+import { DebtStatusEntity } from "./../Entities/debtStatus";
 import { DepartmentEntity } from "./../Entities/department_entity";
 import { EmployeeEntity } from "./../Entities/employee_entity";
 import { DebtTypeEntity } from "./../Entities/debtType";
@@ -15,6 +16,7 @@ const tables: any[] = [
   DebtTypeEntity,
   EmployeeEntity,
   DepartmentEntity,
+  DebtStatusEntity,
 ];
 
 export const local_dataSource = async (): Promise<DataSource> => {

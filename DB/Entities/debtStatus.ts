@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: "DebtTypes" })
-export class DebtTypeEntity {
+@Entity({ name: "DebtStatus" })
+export class DebtStatusEntity {
   // constructor(
   //   firstName: string,
   //   lastName: string,
@@ -22,7 +22,7 @@ export class DebtTypeEntity {
   // }
 
   @PrimaryGeneratedColumn()
-  debtTypeId!: number;
-  @Column({ nullable: false, name: "DebtType" })
-  debtType!: string;
+  debtStatusId!: number;
+  @Column({ nullable: false })
+  debtStatus!: string;
 }

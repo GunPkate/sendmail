@@ -7,6 +7,9 @@ insert into customerdetails (FirstName,LastName,email,contact,address) VALUES('�
 insert into debttypes (debttype) VALUES('สินเชื่อส่วนบุคคล');
 insert into debttypes (debttype) VALUES('หนี้บัตรเครดิต');
 
+insert into debtstatus (debtstatus) VALUES('ชำระแล้ว');
+insert into debtstatus (debtstatus) VALUES('ลูกหนี้สินเชื่อ');
+
 insert into departments (departmentName) VALUES('ลูกหนี้ทั่วไป');
 insert into departments (departmentName) VALUES('แผนกเร่งรัดหนี้');
 
@@ -16,8 +19,10 @@ insert into employees (firstName,lastName,departmentId) VALUES('ละมุน'
 insert into customers (CustomerDetailId) VALUES(1);
 insert into customers (CustomerDetailId) VALUES(2);
 
-INSERT into debts (balance,customerId,debtTypeID) values (7000,1,1);
-INSERT into debts (balance,customerId,debtTypeID,dueAt) values (7000,2,1,'2022-06-21');
+INSERT into debts (balance,customerId,debtTypeID,debtstatusid) values (7000,1,1,2);
+INSERT into debts (balance,customerId,debtTypeID,dueAt,debtstatusid) values (7000,2,1,'2022-06-21',1);
+INSERT into debts (balance,customerId,debtTypeID,dueAt,debtstatusid) values (20000,2,1,'2022-06-21',2);
+INSERT into debts (balance,customerId,debtTypeID,dueAt,debtstatusid) values (200000,2,1,'2022-09-21',2);
 
 Select * 
 from customers c 

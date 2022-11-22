@@ -8,6 +8,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { DebtStatusEntity } from "./debtStatus";
 
 @Entity({ name: "Debts" })
 export class DebtEntity {
@@ -45,10 +46,17 @@ export class DebtEntity {
 
   @ManyToOne(
     () => DebtTypeEntity,
-    (debtType: DebtTypeEntity) => debtType.DebtId
+    (debtType: DebtTypeEntity) => debtType.debtTypeId
   )
   @JoinColumn({ name: "debtTypeID" })
   debtTypeID!: DebtTypeEntity;
+
+  @ManyToOne(
+    () => DebtStatusEntity,
+    (debtStatus: DebtStatusEntity) => debtStatus.debtStatusId
+  )
+  @JoinColumn({ name: "debtStatusID" })
+  debtStatusID!: DebtStatusEntity;
 
   @CreateDateColumn({
     default: () => "CURRENT_TIMESTAMP",
