@@ -13,7 +13,8 @@ Npm nodemailer
 Npm moment
 Npm handlebars
 MySQL
-|
+|https://medium.com/@gundash1/type-orm-automail-leasing-4cb3466b6aac
+
 
 |Function  REST API Method: POST| Description|
 |---|---|
