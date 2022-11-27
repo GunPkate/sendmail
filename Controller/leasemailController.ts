@@ -9,7 +9,8 @@ import leasingEmail from "./LeasingEmail";
 import { sendmail_leasing } from "../function/sendmail_leasing";
 
 const api_path = "lease";
-const debtlist_query = `
+
+const allCustomer = `
 Select 
 c.customerId,	
 FirstName,	
@@ -19,6 +20,7 @@ balance,
 dueAt,
 dt.debtTypeID,
 dt.debtType,
+ds.debtstatusId,
 ds.debtstatus
 
 from customers c 
@@ -28,6 +30,20 @@ join debttypes dt on dt.DebtTypeId = db.debtTypeID
 join debtstatus ds on ds.debtstatusId = db.debtstatusId
 `;
 
+const debtlist_query =
+  allCustomer +
+  `
+ where ds.debtstatusId = '2'
+`;
+
+const calDate = async (item: any) => {
+  const now = await moment();
+  let date = await moment(item.dueAt, "YYYY-MM-DD");
+  let lateDue = await now.diff(date, "days");
+  console.log(now.format("YYYY-MM-DD"), date.format("YYYY-MM-DD"), lateDue);
+  return lateDue;
+};
+
 export const leaseMailController = (con: DataSource): Array<ServerRoute> => {
   const customer = con.getRepository(CustomerEntity);
   const debt = con.getRepository(DebtEntity);
@@ -35,9 +51,22 @@ export const leaseMailController = (con: DataSource): Array<ServerRoute> => {
   return [
     {
       method: "GET",
-      path: `/${api_path}`,
+      path: `/${api_path}/find`,
       handler: async (request: Request, h: ResponseToolkit, err?: Error) => {
         return debt.find();
+      },
+    },
+    {
+      method: "GET",
+      path: `/${api_path}/allCustomer`,
+      handler: async (request: Request, h: ResponseToolkit, err?: Error) => {
+        const detail = await con.query(allCustomer);
+        console.log(detail);
+
+        return h.response({
+          Data: detail,
+          Count: detail.length,
+        });
       },
     },
     {
@@ -60,16 +89,14 @@ export const leaseMailController = (con: DataSource): Array<ServerRoute> => {
         const debtList = await con.query(debtlist_query);
         let array = [];
         if (debtList) {
-          const now = moment();
-          array = debtList.filter((item: { dueAt: any }) => {
-            let date = moment(item.dueAt).format("YYYY-MM-DD");
-            let dateCal = moment(date.split("-"));
-            let lateDue = now.diff(dateCal, "days");
-            return lateDue > 0;
-          });
+          array = debtList.filter(
+            async (item: { dueAt: any; debtstatusId: number }) => {
+              return await calDate(item) > 0;
+            }
+          );
           for (let i = 0; i < array.length; i++) {
-            console.log(array[i]);
-            sendmail_leasing(array[i], array[i].email);
+            // console.log(array[i]);
+            // sendmail_leasing(array[i], array[i].email);
             // sendmail_leasing(debtList[i],debtList[i].email);
           }
         }
@@ -87,11 +114,8 @@ export const leaseMailController = (con: DataSource): Array<ServerRoute> => {
         const debtList = await con.query(debtlist_query);
         if (debtList) {
           const now = moment();
-          array = debtList.filter((item: { dueAt: any }) => {
-            let date = moment(item.dueAt).format("YYYY-MM-DD");
-            let dateCal = moment(date.split("-"));
-            let lateDue = now.diff(dateCal, "days");
-            return lateDue > 0;
+          array = debtList.filter(async (item: { dueAt: any }) => {
+            return await calDate(item) > 0;
           });
           for (let i = 0; i < array.length; i++) {
             console.log(array[i]);
