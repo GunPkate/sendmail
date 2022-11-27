@@ -15,6 +15,20 @@ Select
 c.customerId,	
 FirstName,	
 LastName,
+ds.debtstatusId,
+ds.debtstatus
+
+from customers c 
+Join customerdetails d on d.customerDetailId = c.customerDetailId
+JOIN debts db on db.customerId = c.customerId
+join debtstatus ds on ds.debtstatusId = db.debtstatusId
+`;
+
+const debtlist_query =`
+Select 
+c.customerId,	
+FirstName,	
+LastName,
 email,	
 balance,	
 dueAt,
@@ -28,11 +42,6 @@ Join customerdetails d on d.customerDetailId = c.customerDetailId
 JOIN debts db on db.customerId = c.customerId
 join debttypes dt on dt.DebtTypeId = db.debtTypeID
 join debtstatus ds on ds.debtstatusId = db.debtstatusId
-`;
-
-const debtlist_query =
-  allCustomer +
-  `
  where ds.debtstatusId = '2'
 `;
 
@@ -113,7 +122,6 @@ export const leaseMailController = (con: DataSource): Array<ServerRoute> => {
         let array = [];
         const debtList = await con.query(debtlist_query);
         if (debtList) {
-          const now = moment();
           array = debtList.filter(async (item: { dueAt: any }) => {
             return await calDate(item) > 0;
           });

@@ -14,6 +14,14 @@ interface debtList {
   DebtType: string;
 }
 
+const calDate = async (item: any) => {
+  const now = await moment();
+  let date = await moment(item.dueAt, "YYYY-MM-DD");
+  let lateDue = await now.diff(date, "days");
+  console.log(now.format("YYYY-MM-DD"), date.format("YYYY-MM-DD"), lateDue);
+  return lateDue;
+};
+
 async function leasingEmail(debtList: debtList): Promise<Array<string>> {
   const mail = await setData(debtList);
   const data = mail.content;
@@ -34,12 +42,8 @@ async function setData(debtList: debtList) {
   const debt = debtList.balance;
   const enp_name = "B";
 
-  const now = moment();
-  let date2 = moment(debtList.dueAt).format("YYYY-MM-DD");
-  let dateCal = moment(date2.split("-"));
-  console.log(leasee, now.diff(dateCal, "days"));
-  let lateDue = now.diff(dateCal, "days");
-  // console.log(leasee, moment().diff(moment(date), "days"));
+  const now_deadline = await moment();
+  let lateDue =await calDate(debtList);
 
   let filepath = "";
   let deadline = "";
@@ -47,13 +51,13 @@ async function setData(debtList: debtList) {
     filepath = "normalAR.hbs";
   } else if (lateDue > 30 && lateDue <= 60) {
     filepath = "secondAR.hbs";
-    deadline = now.add(15).format("DD-MM-YYYY");
+    deadline = now_deadline.add(15).format("DD-MM-YYYY");
   } else if (lateDue > 60 && lateDue <= 90) {
     filepath = "thirdAR.hbs";
-    deadline = now.add(15).format("DD-MM-YYYY");
+    deadline = now_deadline.add(15).format("DD-MM-YYYY");
   } else if (lateDue > 90) {
     filepath = "badDebt.hbs";
-    deadline = now.add(15).format("DD-MM-YYYY");
+    deadline = now_deadline.add(15).format("DD-MM-YYYY");
   } else {
     filepath = "normalAR.hbs";
   }
